@@ -1,20 +1,27 @@
 package sba.sms.services;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import sba.sms.models.Student;
-import sba.sms.utils.CommandLine;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 class StudentServiceTest {
 
+    StudentService studentService = new StudentService();
+
+    @Test
+    void testCreateStudent(){
+        Student student = new Student("test@email.com", "Test Name", "password123");
+        studentService.createStudent(student);
+        Student retrieved = studentService.getStudentByEmail(student.getEmail());
+        assertNotNull(retrieved);
+        assertEquals(student.getEmail(), retrieved.getEmail());
+    }
+
 
 }
+
+
+//Do test//
